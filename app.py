@@ -9,6 +9,8 @@ OPENROUTER_API_KEY = os.environ.get('OPENROUTER_API_KEY', 'sk-or-v1-ad9172e0bca0
 
 def ask_ai(prompt):
     models = [
+        "mistralai/mistral-nemo:free",
+        "mistralai/mistral-small-3.2-24b-instruct:free",
         "deepseek/deepseek-chat-v3-0324:free",
         "google/gemma-3-27b-it:free",
         "mistralai/mistral-small-3.2-24b-instruct:free",
