@@ -8,20 +8,13 @@ app = Flask(__name__)
 OPENROUTER_API_KEY = os.environ.get('OPENROUTER_API_KEY', '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')
 
 def ask_ai(prompt):
-    models = [
-        "mistralai/mistral-nemo:free",
-        "mistralai/mistral-small-3.2-24b-instruct:free",
-        "deepseek/deepseek-chat-v3-0324:free",
-        "google/gemma-3-27b-it:free",
-        "mistralai/mistral-small-3.2-24b-instruct:free",
-        "qwen/qwen3-14b:free",
-        "nousresearch/hermes-3-llama-3.1-405b:free",
-        "arcee-ai/arcee-trinity-7b-thinking:free",
-        "deepseek/deepseek-r1-0528:free",
-        "google/gemma-3-4b-it:free",
-        "meta-llama/llama-3.2-3b-instruct:free",
-        "qwen/qwen-2.5-7b-instruct:free"
-    ]
+    MODELS = [
+    "mistralai/mistral-nemo:free",
+    "deepseek/deepseek-chat-v3-0324:free",
+    "google/gemma-3-27b-it:free",
+    "mistralai/mistral-small-3.2-24b-instruct:free",
+    "qwen/qwen3-14b:free",
+]
     
     for model in models:
         try:
