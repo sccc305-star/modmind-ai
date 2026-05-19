@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModMind AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ ModMind AI</h1>
+            <p class="subtitle">AI-Powered Reddit Moderation Assistant</p>
+        </header>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('post-checker')">📝 Post Checker</button>
+            <button class="tab" onclick="showTab('comment-scanner')">💬 Comment Scanner</button>
+            <button class="tab" onclick="showTab('action-suggester')">⚡ Action Suggester</button>
+        </div>
+
+        <!-- Post Checker -->
+        <div id="post-checker" class="tab-content active">
+            <h2>📝 Check Post Against Rules</h2>
+            <textarea id="communityRules" placeholder="Enter your community rules here...
+Example:
+1. No spam
+2. Be respectful
+3. No self promotion
+4. Stay on topic"></textarea>
+            <textarea id="postContent" placeholder="Paste the Reddit post content here..."></textarea>
+            <button class="action-btn" onclick="checkPost()">🔍 Check Post</button>
+        </div>
+
+        <!-- Comment Scanner -->
+        <div id="comment-scanner" class="tab-content">
+            <h2>💬 Scan Comment for Toxicity</h2>
+            <textarea id="commentContent" placeholder="Paste the Reddit comment here..."></textarea>
+            <button class="action-btn" onclick="scanComment()">🔍 Scan Comment</button>
+        </div>
+
+        <!-- Action Suggester -->
+        <div id="action-suggester" class="tab-content">
+            <h2>⚡ Get Moderation Action</h2>
+            <textarea id="situationContent" placeholder="Describe the moderation situation...
+Example: A user keeps posting off-topic content even after warning. They have 3 violations in the past week."></textarea>
+            <button class="action-btn" onclick="suggestAction()">💡 Get Suggestion</button>
+        </div>
+
+        <!-- Loading -->
+        <div id="loading" class="loading" style="display:none;">
+            🤔 AI is analyzing...
+        </div>
+
+        <!-- Result -->
+        <div id="resultContainer" style="display:none;">
+            <div class="result-header">
+                <span>📊 Analysis Result</span>
+                <button class="copy-btn" onclick="copyResult()">📋 Copy</button>
+            </div>
+            <div id="result" class="result-box"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
