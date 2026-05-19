@@ -7,17 +7,21 @@ app = Flask(__name__)
 
 OPENROUTER_API_KEY = os.environ.get('OPENROUTER_API_KEY', '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')
 
-MODELS = [
-    "deepseek/deepseek-chat-v3-0324:free",
-    "google/gemma-3-27b-it:free",
-    "mistralai/mistral-small-3.2-24b-instruct:free",
-    "qwen/qwen3-14b:free",
-    "nousresearch/hermes-3-llama-3.1-405b:free",
-    "arcee-ai/arcee-trinity-7b-thinking:free"
-]
-
 def ask_ai(prompt):
-    for model in MODELS:
+    models = [
+        "deepseek/deepseek-chat-v3-0324:free",
+        "google/gemma-3-27b-it:free",
+        "mistralai/mistral-small-3.2-24b-instruct:free",
+        "qwen/qwen3-14b:free",
+        "nousresearch/hermes-3-llama-3.1-405b:free",
+        "arcee-ai/arcee-trinity-7b-thinking:free",
+        "deepseek/deepseek-r1-0528:free",
+        "google/gemma-3-4b-it:free",
+        "meta-llama/llama-3.2-3b-instruct:free",
+        "qwen/qwen-2.5-7b-instruct:free"
+    ]
+    
+    for model in models:
         try:
             response = requests.post(
                 url="https://openrouter.ai/api/v1/chat/completions",
@@ -28,15 +32,18 @@ def ask_ai(prompt):
                 data=json.dumps({
                     "model": model,
                     "messages": [{"role": "user", "content": prompt}]
-                })
+                }),
+                timeout=30
             )
             result = response.json()
             if 'choices' in result:
-                return result['choices'][0]['message']['content']
+                answer = result['choices'][0]['message']['content']
+                if answer and len(answer) > 10:
+                    return answer
         except:
             continue
+    
     return "Service busy, please try again!"
-
 @app.route('/')
 def home():
     return render_template('index.html')
