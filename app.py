@@ -12,6 +12,8 @@ MODELS = [
     "google/gemma-3-27b-it:free",
     "mistralai/mistral-small-3.2-24b-instruct:free",
     "qwen/qwen3-14b:free",
+    "nousresearch/hermes-3-llama-3.1-405b:free",
+    "arcee-ai/arcee-trinity-7b-thinking:free"
 ]
 
 def ask_ai(prompt):
