@@ -106,3 +106,51 @@ async function suggestAction() {
         alert('Something went wrong! Please try again.');
     }
 }
+async function bulkScan() {
+    const comments = document.getElementById('bulkComments').value;
+
+    if (!comments) {
+        alert('Please enter comments!');
+        return;
+    }
+
+    showLoading();
+
+    try {
+        const response = await fetch('/bulk-scan', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ comments: comments })
+        });
+        const data = await response.json();
+        showResult(data.result);
+    } catch (error) {
+        document.getElementById('loading').style.display = 'none';
+        alert('Something went wrong! Please try again.');
+    }
+}
+
+async function generateReport() {
+    const community = document.getElementById('communityName').value;
+    const actions = document.getElementById('modActions').value;
+
+    if (!community || !actions) {
+        alert('Please fill all fields!');
+        return;
+    }
+
+    showLoading();
+
+    try {
+        const response = await fetch('/mod-report', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ community: community, actions: actions })
+        });
+        const data = await response.json();
+        showResult(data.result);
+    } catch (error) {
+        document.getElementById('loading').style.display = 'none';
+        alert('Something went wrong! Please try again.');
+    }
+}

@@ -18,6 +18,8 @@
             <button class="tab active" onclick="showTab('post-checker')">📝 Post Checker</button>
             <button class="tab" onclick="showTab('comment-scanner')">💬 Comment Scanner</button>
             <button class="tab" onclick="showTab('action-suggester')">⚡ Action Suggester</button>
+            <button class="tab" onclick="showTab('bulk-scanner')">📋 Bulk Scanner</button>
+            <button class="tab" onclick="showTab('mod-report')">📊 Mod Report</button>
         </div>
 
         <!-- Post Checker -->
@@ -46,6 +48,26 @@ Example:
             <textarea id="situationContent" placeholder="Describe the moderation situation...
 Example: A user keeps posting off-topic content even after warning. They have 3 violations in the past week."></textarea>
             <button class="action-btn" onclick="suggestAction()">💡 Get Suggestion</button>
+        </div>
+
+        <!-- Bulk Scanner -->
+        <div id="bulk-scanner" class="tab-content">
+            <h2>📋 Bulk Comment Scanner</h2>
+            <p style="color:#888;margin-bottom:10px;">Enter each comment on a new line</p>
+            <textarea id="bulkComments" placeholder="Comment 1&#10;Comment 2&#10;Comment 3&#10;..." style="min-height:150px;"></textarea>
+            <button class="action-btn" onclick="bulkScan()">🔍 Scan All Comments</button>
+        </div>
+
+        <!-- Mod Report -->
+        <div id="mod-report" class="tab-content">
+            <h2>📊 Weekly Mod Report</h2>
+            <input type="text" id="communityName" placeholder="Community name e.g. r/technology" style="width:100%;padding:15px;border:2px solid #ffccbc;border-radius:12px;margin-bottom:15px;font-size:1rem;outline:none;">
+            <textarea id="modActions" placeholder="Describe recent mod actions...
+Example:
+- Removed 5 spam posts
+- Warned 3 users
+- Banned 1 user for hate speech"></textarea>
+            <button class="action-btn" onclick="generateReport()">📊 Generate Report</button>
         </div>
 
         <!-- Loading -->

@@ -107,6 +107,53 @@ def suggest_action():
 
     result = ask_ai(prompt)
     return jsonify({'result': result})
+@app.route('/bulk-scan', methods=['POST'])
+def bulk_scan():
+    data = request.get_json()
+    comments = data['comments']
+    
+    prompt = f"""
+    You are a Reddit content moderator AI.
+    
+    Analyze these comments one by one:
+    {comments}
+    
+    For each comment provide:
+    Comment #: [number]
+    Toxic: Yes/No
+    Type: (Hate Speech/Spam/Harassment/Safe)
+    Action: Keep/Remove/Warn
+    
+    Be precise and concise.
+    """
+    
+    result = ask_ai(prompt)
+    return jsonify({'result': result})
 
+@app.route('/mod-report', methods=['POST'])
+def mod_report():
+    data = request.get_json()
+    community = data['community']
+    actions = data['actions']
+    
+    prompt = f"""
+    You are a Reddit moderation AI assistant.
+    
+    Community: {community}
+    Recent Actions: {actions}
+    
+    Generate a professional weekly moderation report with:
+    1. Executive Summary
+    2. Total Actions Taken
+    3. Most Common Violations
+    4. Community Health Score (1-10)
+    5. Recommendations for next week
+    6. Trends to watch
+    
+    Be professional and detailed.
+    """
+    
+    result = ask_ai(prompt)
+    return jsonify({'result': result})
 if __name__ == '__main__':
     app.run(debug=True)
